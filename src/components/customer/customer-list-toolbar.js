@@ -21,10 +21,10 @@ import { Download as DownloadIcon } from "../../icons/download";
 // const [descricao, setDescricao] = useState('')
 // const [categoria, setCategoria] = useState('')
 
-const submit = ( event ) => {
-  event.preventDefault();
-  console.log(`Valores: desc - ${descricao}, cat - ${categoria}`)
-}
+// const submit = ( event ) => {
+//   event.preventDefault();
+//   console.log(`Valores: desc - ${descricao}, cat - ${categoria}`)
+// }
 
 export const TarefasListToolbar = (props) => (
   <Box {...props}>
