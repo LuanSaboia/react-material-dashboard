@@ -13,20 +13,22 @@ import {
   FormControl,
   InputLabel
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Search as SearchIcon } from "../../icons/search";
 import { Upload as UploadIcon } from "../../icons/upload";
 import { Download as DownloadIcon } from "../../icons/download";
 
-// const [descricao, setDescricao] = useState('')
-// const [categoria, setCategoria] = useState('')
 
-// const submit = ( event ) => {
-//   event.preventDefault();
-//   console.log(`Valores: desc - ${descricao}, cat - ${categoria}`)
-// }
+export const TarefasListToolbar = (props) => {
+  const [descricao, setDescricao] = useState('')
+  const [categoria, setCategoria] = useState('')
+  
+  const submit = ( event ) => {
+    event.preventDefault();
+    console.log(`Valores: desc - ${descricao}, cat - ${categoria}`)
+  }
 
-export const TarefasListToolbar = (props) => (
+  return (
   <Box {...props}>
     <Box
       sx={{
@@ -46,13 +48,18 @@ export const TarefasListToolbar = (props) => (
         <CardContent>
           <Grid container>
             <Grid item md={4}>
-              <TextField fullWidth placeholder="Descrição da tarefa" label="Descrição: " 
+              <TextField
+              fullWidth
+              placeholder="Descrição da tarefa"
+              label="Descrição: " 
+              value={descricao}
               onChange={e => setDescricao(e.target.value)}/>
             </Grid>
             <Grid item md={4}>
               <FormControl fullWidth>
                 <InputLabel>Categoria: </InputLabel>
                 <Select label="Categoria: "
+                value={categoria}
                 onChange={e => setCategoria(e.target.value)}>
                   <MenuItem value="">Selecione...</MenuItem>
                   <MenuItem value={"TRABALHO"}>Trabalho</MenuItem>
@@ -69,4 +76,5 @@ export const TarefasListToolbar = (props) => (
       </Card>
     </Box>
   </Box>
-);
+  )
+}
