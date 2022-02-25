@@ -16,6 +16,13 @@ import {
   Typography,
 } from "@mui/material";
 import { getInitials } from "../../utils/get-initials";
+import axios from 'axios'
+
+axios.get('http://minhastarefas-api.herokuapp.com/tarefas', {
+  headers: { 'x-tenant-id' : 'fulano@email.com' }
+}).then( resposta => {
+  console.log(resposta.data)
+})
 
 export const TarefasListResults = ({ tarefas, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);

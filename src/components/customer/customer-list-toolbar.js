@@ -23,9 +23,14 @@ export const TarefasListToolbar = (props) => {
   const [descricao, setDescricao] = useState('')
   const [categoria, setCategoria] = useState('')
   
+
   const submit = ( event ) => {
     event.preventDefault();
-    console.log(`Valores: desc - ${descricao}, cat - ${categoria}`)
+    const tarefa = {
+      descricao: descricao,
+      categoria: categoria
+    }
+    props.salvar(tarefa)
   }
 
   return (
