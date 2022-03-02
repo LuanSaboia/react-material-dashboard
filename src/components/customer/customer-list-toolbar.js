@@ -22,7 +22,6 @@ import { Download as DownloadIcon } from "../../icons/download";
 export const TarefasListToolbar = (props) => {
   const [descricao, setDescricao] = useState('')
   const [categoria, setCategoria] = useState('')
-  
 
   const submit = ( event ) => {
     event.preventDefault();
@@ -31,6 +30,8 @@ export const TarefasListToolbar = (props) => {
       categoria: categoria
     }
     props.salvar(tarefa)
+    setDescricao('')
+    setCategoria('')
   }
 
   return (

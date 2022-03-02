@@ -14,9 +14,13 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  IconButton
 } from "@mui/material";
 import { getInitials } from "../../utils/get-initials";
 import axios from 'axios'
+import AlarmIcon from '@mui/icons-material/Alarm';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 axios.get('http://minhastarefas-api.herokuapp.com/tarefas', {
   headers: { 'x-tenant-id' : 'fulano@email.com' }
@@ -24,7 +28,8 @@ axios.get('http://minhastarefas-api.herokuapp.com/tarefas', {
   console.log(resposta.data)
 })
 
-export const TarefasListResults = ({ tarefas, ...rest }) => {
+export const TarefasListResults = props => {
+  const { tarefas, ...rest} = props;
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -40,11 +45,35 @@ export const TarefasListResults = ({ tarefas, ...rest }) => {
                 <TableCell>Descrição</TableCell>
                 <TableCell>Categoria</TableCell>
                 <TableCell>Status</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
-              
+              {tarefas.map( tarefa => {
+                return(
+                  <TableRow key={tarefa.id}>
+                    <TableCell>{tarefa.id}</TableCell>
+                    <TableCell>{tarefa.descricao}</TableCell>
+                    <TableCell>{tarefa.categoria}</TableCell>
+                    <TableCell>{ tarefa.done ? 'Feito' : 'Pendente' }</TableCell>
+                    <TableCell>
+                    <IconButton onClick={e => props.alterarStatus(tarefa.id)} color="secondary">
+                      { tarefa.done ?
+                        ( <DoneAllIcon /> ) :
+                        ( <AlarmIcon /> )
+                      }
+                    </IconButton>
+                    </TableCell>
+                    <TableCell>
+                      <IconButton onClick={e => props.deleteAction(tarefa.id)}><DeleteIcon /></IconButton>
+                    </TableCell>
+                  </TableRow>
+                )
+              })
+
+              }
             </TableBody>
           </Table>
         </Box>
