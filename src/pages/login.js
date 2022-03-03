@@ -7,13 +7,15 @@ import { Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Facebook as FacebookIcon } from '../icons/facebook';
 import { Google as GoogleIcon } from '../icons/google';
+import { useState } from 'react';
 
 const Login = () => {
   const router = useRouter();
+  const [ email, setEmail ] = useState('')
   const formik = useFormik({
     initialValues: {
-      email: 'demo@devias.io',
-      password: 'Password123'
+      email: ''
+      //password: ''
     },
     validationSchema: Yup.object({
       email: Yup
@@ -22,17 +24,19 @@ const Login = () => {
           'Must be a valid email')
         .max(255)
         .required(
-          'Email is required'),
-      password: Yup
-        .string()
-        .max(255)
-        .required(
-          'Password is required')
+          'Email is required')
+      // password: Yup
+      //   .string()
+      //   .max(255)
+      //   .required(
+      //     'Password is required')
     }),
     onSubmit: () => {
+      localStorage.setItem('email_usuario_logado', email)
       router.push('/');
     }
   });
+
 
   return (
     <>
@@ -66,14 +70,14 @@ const Login = () => {
                 color="textPrimary"
                 variant="h4"
               >
-                Sign in
+                Login
               </Typography>
-              <Typography
+              {/* <Typography
                 color="textSecondary"
                 gutterBottom
                 variant="body2"
               >
-                Sign in on the internal platform
+                Login usando redes sociais
               </Typography>
             </Box>
             <Grid
@@ -93,7 +97,7 @@ const Login = () => {
                   size="large"
                   variant="contained"
                 >
-                  Login with Facebook
+                  Login com Facebook
                 </Button>
               </Grid>
               <Grid
@@ -109,7 +113,7 @@ const Login = () => {
                   size="large"
                   variant="contained"
                 >
-                  Login with Google
+                  Login com Google
                 </Button>
               </Grid>
             </Grid>
@@ -118,33 +122,32 @@ const Login = () => {
                 pb: 1,
                 pt: 3
               }}
-            >
+            > */}
               <Typography
                 align="center"
                 color="textSecondary"
                 variant="body1"
               >
-                or login with email address
+                ou login usando endereço de email
               </Typography>
             </Box>
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
-              helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
+              label="Email"
               margin="normal"
               name="email"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
+              //onBlur={formik.handleBlur}
               type="email"
-              value={formik.values.email}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               variant="outlined"
             />
-            <TextField
+            {/* <TextField
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
-              label="Password"
+              label="Senha"
               margin="normal"
               name="password"
               onBlur={formik.handleBlur}
@@ -152,20 +155,20 @@ const Login = () => {
               type="password"
               value={formik.values.password}
               variant="outlined"
-            />
+            /> */}
             <Box sx={{ py: 2 }}>
               <Button
                 color="primary"
-                disabled={formik.isSubmitting}
+                //disabled={formik.isSubmitting}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
               >
-                Sign In Now
+                Entrar
               </Button>
             </Box>
-            <Typography
+            {/* <Typography
               color="textSecondary"
               variant="body2"
             >
@@ -185,7 +188,7 @@ const Login = () => {
                   Sign Up
                 </Link>
               </NextLink>
-            </Typography>
+            </Typography> */}
           </form>
         </Container>
       </Box>

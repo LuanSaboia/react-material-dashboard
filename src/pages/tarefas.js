@@ -16,7 +16,6 @@ import axios from 'axios'
 import { useState, useEffect } from 'react';
 
 const API_URL = 'http://minhastarefas-api.herokuapp.com/tarefas'
-const headers = { 'x-tenant-id' : 'testemail@email.com' }
 
 const Tarefas = () => {
   const [ tarefas, setTarefas ] = useState([]);
@@ -25,7 +24,7 @@ const Tarefas = () => {
 
   const salvar = (tarefa) => {
     axios.post(API_URL, tarefa, {
-      headers: headers
+      headers: { 'x-tenant-id' : localStorage.getItem('email_usuario_logado') }
     }).then( response => {
       const novaTarefa = response.data
       setTarefas( [...tarefas, novaTarefa] )
@@ -39,7 +38,7 @@ const Tarefas = () => {
 
   const listarTarefas = () => {
     axios.get(API_URL, {
-      headers : headers
+      headers : { 'x-tenant-id' : localStorage.getItem('email_usuario_logado') }
     }).then( response => {
       const listaDeTarefas = response.data
         setTarefas(listaDeTarefas)
@@ -51,7 +50,7 @@ const Tarefas = () => {
 
   const alterarStatus = (id) => {
     axios.patch(`${API_URL}/${id}`, null, {
-      headers: headers
+      headers: { 'x-tenant-id' : localStorage.getItem('email_usuario_logado') }
     }).then( response => {
       const lista = [...tarefas]
       lista.forEach(tarefa => {
@@ -70,7 +69,7 @@ const Tarefas = () => {
 
   const deletar = (id) => {
     axios.delete(`${API_URL}/${id}`, {
-      headers: headers
+      headers: { 'x-tenant-id' : localStorage.getItem('email_usuario_logado') }
     })
     .then( response => {
         const lista = tarefas.filter( tarefa => tarefa.id !== id)
