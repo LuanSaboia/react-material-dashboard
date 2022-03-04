@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -14,6 +15,9 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export const DashboardNavbar = (props) => {
   const { onSidebarOpen, ...other } = props;
+  const logout = () => {
+    
+  }
 
   return (
     <>
@@ -66,6 +70,12 @@ export const DashboardNavbar = (props) => {
               >
                 <BellIcon fontSize="small" />
               </Badge>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Logout">
+            <IconButton sx={{ ml: 1 }}
+            onClick={logout}>
+              <LogoutIcon />
             </IconButton>
           </Tooltip>
           <Avatar

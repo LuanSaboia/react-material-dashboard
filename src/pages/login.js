@@ -12,10 +12,15 @@ import { useState } from 'react';
 const Login = () => {
   const router = useRouter();
   const [ email, setEmail ] = useState('')
+
+  const handleSignIn = event => {
+    event.preventDefault();
+    localStorage.setItem('email_usuario_logado', email)
+    router.push('/');
+  }
   const formik = useFormik({
     initialValues: {
       email: ''
-      //password: ''
     },
     validationSchema: Yup.object({
       email: Yup
@@ -64,7 +69,7 @@ const Login = () => {
               Dashboard
             </Button>
           </NextLink>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={handleSignIn}>
             <Box sx={{ my: 3 }}>
               <Typography
                 color="textPrimary"
@@ -132,7 +137,7 @@ const Login = () => {
               </Typography>
             </Box>
             <TextField
-              error={Boolean(formik.touched.email && formik.errors.email)}
+              //error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
               label="Email"
               margin="normal"
