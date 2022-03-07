@@ -7,6 +7,7 @@ import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useRouter } from 'next/router';
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -14,9 +15,11 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 }));
 
 export const DashboardNavbar = (props) => {
+  const router = useRouter();
   const { onSidebarOpen, ...other } = props;
   const logout = () => {
-    
+    localStorage.removeItem('email_usuario_logado')
+    router.push('/login')
   }
 
   return (
@@ -88,6 +91,7 @@ export const DashboardNavbar = (props) => {
           >
             <UserCircleIcon fontSize="small" />
           </Avatar>
+          
         </Toolbar>
       </DashboardNavbarRoot>
     </>
